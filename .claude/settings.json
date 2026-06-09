@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "WebFetch(domain:developers.cloudflare.com)",
+      "WebFetch(domain:blog.cloudflare.com)",
+      "WebFetch(domain:www.kacelab.com)",
+      "Bash(curl -s https://www.kacelab.com/)",
+      "Bash(curl -s https://www.kacelab.com/js/common.js)",
+      "Bash(curl -s https://www.kacelab.com/js/main.js)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\nbware\\.claude\\projects\\c--WorkSpace-Projects--personal-taupt-official\\memory",
+      "c:\\WorkSpace\\Projects\\_personal\\taupt-official\\content\\posts"
+    ]
+  }
+}

@@ -1,9 +1,11 @@
 {
   "permissions": {
+            "defaultMode":"auto",
     "allow": [
       "Bash(npx tsc:*)",
       "Bash(npx vite:*)",
       "Bash(git remote *)"
     ]
+    
   }
 }

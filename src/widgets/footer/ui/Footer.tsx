@@ -44,7 +44,7 @@ export function Footer() {
 
       <div className={styles.footerRight}>
         <div className={styles.footerLinks}>
-          {t.footer.links.map((link) => (
+          {t.footer.links.filter((link) => link.href === '/blog').map((link) => (
             <a
               key={link.href}
               href={link.href}

@@ -28,8 +28,6 @@ export function Header() {
   const t = getT(lang)
 
   const navLinks = [
-    { label: t.nav.products, href: `/${locale}/products` },
-    { label: t.nav.technology, href: `/${locale}/technology` },
     { label: t.nav.blog, href: `/${locale}/blog` },
   ]
 
@@ -96,7 +94,7 @@ export function Header() {
         <a
           href="/"
           className={styles.logo}
-          onClick={(e) => { e.preventDefault(); location.pathname === `/${locale}` ? window.scrollTo({ top: 0, behavior: 'smooth' }) : navigate(`/${locale}`) }}
+          onClick={(e) => { e.preventDefault(); location.pathname === `/${locale}/blog` ? window.scrollTo({ top: 0, behavior: 'smooth' }) : navigate(`/${locale}/blog`) }}
         >
           <img
             src="/images/taupt_logo_black.png"

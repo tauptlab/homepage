@@ -10,7 +10,8 @@
       "Bash(curl -s https://www.kacelab.com/js/common.js)",
       "Bash(curl -s https://www.kacelab.com/js/main.js)",
       "Bash(GIT_COMMITTER_NAME=taupt GIT_COMMITTER_EMAIL=taupt.lab@gmail.com git commit --amend --author=\"taupt <taupt.lab@gmail.com>\" --no-edit)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(git config *)"
     ],
     "additionalDirectories": [
       "c:\\Users\\nbware\\.claude\\projects\\c--WorkSpace-Projects--personal-taupt-official\\memory",

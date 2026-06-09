@@ -6,3 +6,7 @@ dist/
 *.log
 .DS_Store
 .vite/
+
+# Blog generation pipeline is managed as a separate repo
+# (github.com/tauptlab/homepage_pipeline). Do not track its contents here.
+pipeline/

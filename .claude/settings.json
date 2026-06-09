@@ -11,11 +11,15 @@
       "Bash(curl -s https://www.kacelab.com/js/main.js)",
       "Bash(GIT_COMMITTER_NAME=taupt GIT_COMMITTER_EMAIL=taupt.lab@gmail.com git commit --amend --author=\"taupt <taupt.lab@gmail.com>\" --no-edit)",
       "Bash(git push *)",
-      "Bash(git config *)"
+      "Bash(git config *)",
+      "Bash(python pipeline/orchestrator.py init)",
+      "Bash(python pipeline/orchestrator.py status pending-20260609-154954)",
+      "Bash(git commit *)"
     ],
     "additionalDirectories": [
       "c:\\Users\\nbware\\.claude\\projects\\c--WorkSpace-Projects--personal-taupt-official\\memory",
-      "c:\\WorkSpace\\Projects\\_personal\\taupt-official\\content\\posts"
+      "c:\\WorkSpace\\Projects\\_personal\\taupt-official\\content\\posts",
+      "c:\\WorkSpace\\Projects\\_personal\\taupt-official\\.claude"
     ]
   }
 }

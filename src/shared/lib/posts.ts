@@ -1,5 +1,10 @@
 import { marked } from 'marked'
+import markedKatex from 'marked-katex-extension'
+import markedFootnote from 'marked-footnote'
 import type { Lang } from './i18n'
+
+marked.use(markedKatex({ throwOnError: false, nonStandard: true }))
+marked.use(markedFootnote())
 
 export interface PostMeta {
   slug: string

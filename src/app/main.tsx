@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles/fonts.css'
+import 'katex/dist/katex.min.css'
 import './styles/global.css.ts'
 import '@shared/lib/gsap'
 import { App } from './App'

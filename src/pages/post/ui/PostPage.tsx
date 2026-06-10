@@ -14,6 +14,16 @@ function formatDate(dateStr: string, lang: 'ko' | 'en'): string {
     : d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
 }
 
+function estimateReadingMinutes(content: string, lang: 'ko' | 'en'): number {
+  const stripped = content.replace(/```[\s\S]*?```/g, '').replace(/[#>*_`\-]/g, '')
+  if (lang === 'ko') {
+    const hangul = (stripped.match(/[가-힣]/g) || []).length
+    return Math.max(1, Math.round(hangul / 500))
+  }
+  const words = stripped.trim().split(/\s+/).filter(Boolean).length
+  return Math.max(1, Math.round(words / 220))
+}
+
 export function PostPage() {
   const { slug, locale = 'kor' } = useParams<{ slug: string; locale: string }>()
   const navigate = useNavigate()
@@ -74,15 +84,14 @@ export function PostPage() {
         <p className={styles.heroDesc}>{post.description}</p>
 
         <div className={styles.heroAuthor}>
-          <span>{post.author}</span>
+          <span className={styles.heroAuthorName}>{post.author}</span>
           <span className={styles.authorDot} />
           <span>{formatDate(post.date, lang)}</span>
-          {post.tags.length > 0 && (
-            <>
-              <span className={styles.authorDot} />
-              <span>{post.tags.join(', ')}</span>
-            </>
-          )}
+          <span className={styles.authorDot} />
+          <span>
+            {estimateReadingMinutes(post.content, lang)}
+            {lang === 'ko' ? '분 분량' : ' min read'}
+          </span>
         </div>
       </div>
 

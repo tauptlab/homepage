@@ -5,7 +5,7 @@ date: "2026-06-09"
 category: "Technology"
 author: "정현진(Hyunjin Jeong)"
 thumbnail: "/images/blog/dp-count-query-negative-output.png"
-tags: ["differential-privacy", "laplace-mechanism", "post-processing", "data-privacy"]
+tags: ["차등 프라이버시", "라플라스 메커니즘", "후처리", "데이터 프라이버시"]
 ---
 
 ## 음수 카운트는 버그가 아니라 정상 출력입니다

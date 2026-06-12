@@ -4,7 +4,7 @@ description: "차등 프라이버시 ε은 한 사람의 데이터가 있든 없
 date: "2026-05-14"
 category: "Technology"
 author: "정현진(Hyunjin Jeong)"
-thumbnail: "/images/blog/dp-epsilon-attacker-view.png"
+thumbnail: "/images/blog/dp-epsilon-attacker-view.webp"
 tags: ["차등 프라이버시", "엡실론", "데이터 프라이버시", "비식별화", "프라이버시 보호"]
 ---
 
@@ -110,7 +110,7 @@ $$\Pr[M(D) \in S] \le e^{\varepsilon} \cdot \Pr[M(D') \in S]$$
 
 한 걸음 더 들어가, 공격자의 확신이 실제로 몇 %까지 오를 수 있는지 따져보겠습니다.
 
-> **예: (가상 시나리오)** 공격자가 발표 전에는 "김 부장이 그 1,000명에 있었다"를 절반, 즉 50%만 확신했다고 해 봅시다. 50%라는 사전 확률은 '있었다'와 '없었다'의 가능성 비(odds)가 1:1이라는 뜻입니다.
+> **예를 들어,** 공격자가 발표 전에는 "김 부장이 그 1,000명에 있었다"를 절반, 즉 50%만 확신했다고 해 봅시다. 50%라는 사전 확률은 '있었다'와 '없었다'의 가능성 비(odds)가 1:1이라는 뜻입니다.
 
 Kasiviswanathan과 Smith의 베이즈 해석에 따르면, 공격자가 결과를 본 뒤 갱신한 사후 odds는 사전 odds의 $e^{\varepsilon}$배를 넘지 못합니다.[^kasiv]
 

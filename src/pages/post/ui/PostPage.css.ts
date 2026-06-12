@@ -310,16 +310,33 @@ globalStyle(`${prose} blockquote strong:first-child`, {
   marginBottom: '4px',
 })
 
-/* Tables */
+/* Tables — wrapped in a scroll container so wide tables scroll inside their
+   own box on mobile instead of widening the whole page (horizontal scroll). */
+globalStyle(`${prose} .table-wrap`, {
+  marginTop: '8px',
+  marginBottom: '28px',
+  overflowX: 'auto',
+  WebkitOverflowScrolling: 'touch',
+  borderRadius: '8px',
+  border: `1px solid ${themeContract.color.border}`,
+  overscrollBehaviorX: 'contain',
+})
+
 globalStyle(`${prose} table`, {
   width: '100%',
   borderCollapse: 'collapse',
-  marginBottom: '28px',
-  marginTop: '8px',
   fontSize: '14.5px',
-  overflow: 'hidden',
-  borderRadius: '8px',
-  border: `1px solid ${themeContract.color.border}`,
+})
+
+/* On mobile, keep columns legible and let the wrapper scroll horizontally
+   rather than crushing cells into tall, unreadable stacks. */
+globalStyle(`${prose} .table-wrap table`, {
+  '@media': {
+    '(max-width: 768px)': {
+      minWidth: '560px',
+      fontSize: '13px',
+    },
+  },
 })
 
 globalStyle(`${prose} thead`, {

@@ -4,7 +4,7 @@ description: "차등 프라이버시 Laplace 메커니즘이 카운트 쿼리에
 date: "2026-06-09"
 category: "Technology"
 author: "정현진(Hyunjin Jeong)"
-thumbnail: "/images/blog/dp-count-query-negative-output.png"
+thumbnail: "/images/blog/dp-count-query-negative-output.webp"
 tags: ["차등 프라이버시", "라플라스 메커니즘", "후처리", "데이터 프라이버시"]
 ---
 

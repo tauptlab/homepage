@@ -15,6 +15,14 @@ globalStyle(':root', {
   scrollBehavior: 'smooth',
 })
 
+globalStyle('html, body', {
+  // Guard against any element (wide tables, math, long tokens) pushing the
+  // page wider than the viewport on mobile. `clip` (not `hidden`) avoids
+  // creating a scroll container, so position: sticky keeps working.
+  overflowX: 'clip',
+  maxWidth: '100%',
+})
+
 globalStyle('body', {
   minHeight: '100vh',
 })

@@ -4,7 +4,7 @@ description: "차등 프라이버시에서 보호 단위를 행·사용자·이�
 date: "2026-06-06"
 category: "Research"
 author: "정현진(Hyunjin Jeong)"
-thumbnail: "/images/blog/sp800-226-privacy-unit-definition.png"
+thumbnail: "/images/blog/sp800-226-privacy-unit-definition.webp"
 tags: ["차등 프라이버시", "NIST SP 800-226", "프라이버시 단위", "데이터 프라이버시", "ε"]
 ---
 

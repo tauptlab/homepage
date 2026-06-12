@@ -69,6 +69,13 @@ function readingMinutes(text, lang) {
   return Math.max(1, Math.round(lang === 'ko' ? wc / 500 : wc / 220))
 }
 
+/** Wrap tables for horizontal scroll on mobile (mirrors src/shared/lib/posts.ts). */
+function wrapTables(html) {
+  return html
+    .replace(/<table(\s[^>]*)?>/g, '<div class="table-wrap"><table$1>')
+    .replace(/<\/table>/g, '</table></div>')
+}
+
 // ── load posts ───────────────────────────────────────────────────────────────
 /** @returns {Array<{locale:string, slug:string, data:any, html:string, content:string}>} */
 function loadPosts() {
@@ -81,7 +88,7 @@ function loadPosts() {
       const raw = readFileSync(join(dir, file), 'utf8')
       const { data, content } = matter(raw)
       const slug = file.replace(/\.md$/, '')
-      const html = /** @type {string} */ (marked.parse(content))
+      const html = wrapTables(/** @type {string} */ (marked.parse(content)))
       out.push({ locale: seg, slug, data, html, content })
     }
   }
@@ -163,7 +170,7 @@ function headMeta(o) {
 }
 
 // ── HTML template assembly ───────────────────────────────────────────────────
-const PRERENDER_STYLE = `<style id="seo-prerender-style">#seo-prerender{max-width:760px;margin:0 auto;padding:96px 24px 64px;font-family:Pretendard,system-ui,sans-serif;line-height:1.75;color:#1a1a1a}#seo-prerender img{max-width:100%;height:auto}#seo-prerender pre{overflow:auto}#seo-prerender h1{font-size:2rem;line-height:1.3}</style>`
+const PRERENDER_STYLE = `<style id="seo-prerender-style">#seo-prerender{max-width:760px;margin:0 auto;padding:96px 24px 64px;font-family:Pretendard,system-ui,sans-serif;line-height:1.75;color:#1a1a1a}#seo-prerender img{max-width:100%;height:auto}#seo-prerender pre{overflow:auto}#seo-prerender h1{font-size:2rem;line-height:1.3}#seo-prerender .table-wrap{overflow-x:auto}#seo-prerender table{border-collapse:collapse;width:100%}#seo-prerender th,#seo-prerender td{border:1px solid #ddd;padding:6px 10px;text-align:left}</style>`
 
 /**
  * Take the built dist/index.html as the template and produce a route HTML doc.

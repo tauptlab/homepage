@@ -53,6 +53,14 @@ function parseFrontmatter(raw: string): { data: Record<string, unknown>; content
   return { data, content }
 }
 
+// Wrap tables so wide tables scroll inside their own container instead of
+// pushing the whole page wider than the viewport on mobile.
+function wrapTables(html: string): string {
+  return html
+    .replace(/<table(\s[^>]*)?>/g, '<div class="table-wrap"><table$1>')
+    .replace(/<\/table>/g, '</table></div>')
+}
+
 const koModules = import.meta.glob('/content/posts/ko/*.md', { query: '?raw', import: 'default', eager: true })
 const enModules = import.meta.glob('/content/posts/en/*.md', { query: '?raw', import: 'default', eager: true })
 
@@ -65,7 +73,7 @@ function buildPosts(modules: Record<string, unknown>, lang: Lang): Post[] {
     .map(([path, raw]) => {
       const { data, content } = parseFrontmatter(raw as string)
       const slug = slugFromPath(path)
-      const html = marked(content) as string
+      const html = wrapTables(marked(content) as string)
       return {
         slug,
         lang,

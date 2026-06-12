@@ -4,7 +4,7 @@ description: "L2 norm clipping이 client update의 sensitivity를 정해 ε 보�
 date: "2026-06-03"
 category: "Technology"
 author: "정현진(Hyunjin Jeong)"
-thumbnail: "/images/blog/dp-fl-gradient-clipping.png"
+thumbnail: "/images/blog/dp-fl-gradient-clipping.webp"
 tags: ["차등 프라이버시", "연합학습", "그래디언트 클리핑", "DP-SGD", "민감도"]
 ---
 
@@ -80,7 +80,7 @@ Abadi et al.의 MNIST 실험은 이 trade-off를 실제 수치로 보여 줍니�
 1. **$C$를 너무 작게** 잡으면 대부분의 update가 잘려 나가 정보가 사라집니다. 한 사람의 긴 발언을 한 문장으로 줄여 버리는 셈이라, 모델이 배울 신호가 무너집니다.
 2. **$C$를 너무 크게** 잡으면 $\sigma = zC$를 따라 노이즈가 커집니다. 신호 대비 노이즈 비율(SNR)이 붕괴해 학습이 안개 속에 묻힙니다.
 
-> **예: (가상 시나리오)** client update norm의 median이 약 3.0인 작업에서 $C=1$로 잡으면 절반 이상의 update가 3분의 1 이하로 잘려 bias가 커지고, $C=10$으로 잡으면 노이즈 $\sigma=zC$가 3배 이상 커져 SNR이 무너집니다. 이 3.0/1/10 수치는 직관을 위한 예시일 뿐, 특정 논문의 실측값이 아닙니다.
+> **예를 들어,** client update norm의 median이 약 3.0인 작업에서 $C=1$로 잡으면 절반 이상의 update가 3분의 1 이하로 잘려 bias가 커지고, $C=10$으로 잡으면 노이즈 $\sigma=zC$가 3배 이상 커져 SNR이 무너집니다. 여기 3.0·1·10은 감을 잡기 위한 가정값입니다.
 
 이 딜레마의 처방이 **adaptive clipping**(적응형 클리핑)입니다. adaptive clipping은 고정된 clip norm 대신 client update norm 분포의 특정 분위수(quantile) 위치 값으로 $C$를 잡되, 그 분위수 값 자체를 차등 프라이버시를 지키며 온라인으로 추정하는 방법입니다.[^5]
 

@@ -11,6 +11,7 @@ export const page = style({
   minHeight: '100vh',
   backgroundColor: themeContract.color.bg,
   transition: 'background-color 0.3s',
+  overflowX: 'clip',
 })
 
 /* ─── Hero header ─── */
@@ -105,7 +106,7 @@ export const filterBtnActive = style({
 /* ─── Featured post (first card, large) ─── */
 export const featured = style({
   display: 'grid',
-  gridTemplateColumns: '1fr 1fr',
+  gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)',
   gap: '32px',
   marginBottom: '48px',
   borderRadius: '20px',
@@ -118,7 +119,7 @@ export const featured = style({
   },
   '@media': {
     '(max-width: 900px)': {
-      gridTemplateColumns: '1fr',
+      gridTemplateColumns: 'minmax(0, 1fr)',
     },
   },
 })
@@ -205,14 +206,14 @@ export const metaDot = style({
 /* ─── Post grid ─── */
 export const grid = style({
   display: 'grid',
-  gridTemplateColumns: 'repeat(4, 1fr)',
+  gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
   gap: '24px',
   '@media': {
     '(max-width: 1100px)': {
-      gridTemplateColumns: 'repeat(2, 1fr)',
+      gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
     },
     '(max-width: 640px)': {
-      gridTemplateColumns: '1fr',
+      gridTemplateColumns: 'minmax(0, 1fr)',
     },
   },
 })

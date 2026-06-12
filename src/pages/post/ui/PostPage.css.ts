@@ -10,6 +10,7 @@ export const page = style({
   minHeight: '100vh',
   backgroundColor: themeContract.color.bg,
   transition: 'background-color 0.3s',
+  overflowX: 'clip',
 })
 
 /* ─── Hero ─── */
@@ -148,7 +149,10 @@ export const layout = style({
   alignItems: 'start',
   '@media': {
     '(max-width: 1024px)': {
-      gridTemplateColumns: '1fr',
+      // minmax(0, 1fr), not 1fr: a plain 1fr resolves its min to min-content,
+      // so a wide child (table/math/long token) would push the column past
+      // the viewport. minmax(0, …) lets the column shrink and the child scroll.
+      gridTemplateColumns: 'minmax(0, 1fr)',
       gap: '48px',
     },
     '(max-width: 768px)': {
@@ -165,8 +169,9 @@ export const prose = style({
   color: themeContract.color.text,
   maxWidth: '900px',
   width: '100%',
+  minWidth: 0,
   wordBreak: 'keep-all',
-  overflowWrap: 'break-word',
+  overflowWrap: 'anywhere',
 })
 
 /* Headings */
@@ -252,6 +257,7 @@ globalStyle(`${prose} code`, {
   borderRadius: '4px',
   border: 'none',
   fontWeight: 500,
+  overflowWrap: 'anywhere',
 })
 
 /* Code blocks */
@@ -418,9 +424,15 @@ globalStyle(`${prose} em`, {
 /* KaTeX math */
 globalStyle(`${prose} .katex-display`, {
   margin: '28px 0',
+  maxWidth: '100%',
   overflowX: 'auto',
   overflowY: 'hidden',
   padding: '4px 0',
+})
+
+/* Inline math must never widen the line beyond the column. */
+globalStyle(`${prose} .katex`, {
+  maxWidth: '100%',
 })
 
 globalStyle(`${prose} .katex`, {
@@ -550,14 +562,14 @@ export const relatedTitle = style({
 
 export const relatedGrid = style({
   display: 'grid',
-  gridTemplateColumns: 'repeat(4, 1fr)',
+  gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
   gap: '20px',
   '@media': {
     '(max-width: 900px)': {
-      gridTemplateColumns: 'repeat(2, 1fr)',
+      gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
     },
     '(max-width: 580px)': {
-      gridTemplateColumns: '1fr',
+      gridTemplateColumns: 'minmax(0, 1fr)',
     },
   },
 })

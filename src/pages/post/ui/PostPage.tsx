@@ -4,6 +4,7 @@ import { gsap } from '@shared/lib/gsap'
 import { getPostBySlug, getAllPosts, type PostMeta } from '@shared/lib/posts'
 import { useAppStore } from '@shared/store'
 import { getT } from '@shared/lib/i18n'
+import { useSeo } from '@shared/lib/seo'
 import { Header } from '@widgets/header'
 import * as styles from './PostPage.css'
 
@@ -36,6 +37,14 @@ export function PostPage() {
   const related = allPosts
     .filter((p) => p.slug !== slug && p.category === post?.category)
     .slice(0, 3)
+
+  useSeo({
+    title: post ? `${post.title} | Taupt` : 'Taupt',
+    description: post?.description,
+    path: `/${locale}/blog/${slug ?? ''}`,
+    image: post?.thumbnail,
+    type: 'article',
+  })
 
   useEffect(() => {
     window.scrollTo({ top: 0 })

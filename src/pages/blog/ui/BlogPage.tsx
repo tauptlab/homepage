@@ -4,6 +4,7 @@ import { gsap } from '@shared/lib/gsap'
 import { getAllPosts, getAllCategories, type PostMeta } from '@shared/lib/posts'
 import { useAppStore } from '@shared/store'
 import { getT } from '@shared/lib/i18n'
+import { useSeo } from '@shared/lib/seo'
 import { Header } from '@widgets/header'
 import { Footer } from '@widgets/footer'
 import * as styles from './BlogPage.css'
@@ -22,6 +23,13 @@ export function BlogPage() {
   const t = getT(lang)
   const [activeCategory, setActiveCategory] = useState<string>(t.blog.allCategory)
   const gridRef = useRef<HTMLDivElement>(null)
+
+  useSeo({
+    title: `Blog | Taupt`,
+    description: t.blog.desc.replace(/\n/g, ' '),
+    path: `/${locale}/blog`,
+    type: 'website',
+  })
 
   const allPosts = getAllPosts(lang)
   const categories = [t.blog.allCategory, ...getAllCategories(lang)]

@@ -70,6 +70,12 @@ function slugFromPath(path: string): string {
 
 function buildPosts(modules: Record<string, unknown>, lang: Lang): Post[] {
   return Object.entries(modules)
+    // Skip drafts / WIP files that lack frontmatter (e.g. content/posts/ko/draft.md):
+    // a post must have at least a title and date to be published.
+    .filter(([, raw]) => {
+      const { data } = parseFrontmatter(raw as string)
+      return Boolean(data.title) && Boolean(data.date)
+    })
     .map(([path, raw]) => {
       const { data, content } = parseFrontmatter(raw as string)
       const slug = slugFromPath(path)

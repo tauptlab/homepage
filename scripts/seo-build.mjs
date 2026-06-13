@@ -87,6 +87,8 @@ function loadPosts() {
       if (!file.endsWith('.md')) continue
       const raw = readFileSync(join(dir, file), 'utf8')
       const { data, content } = matter(raw)
+      // Skip drafts / WIP files without frontmatter (e.g. draft.md).
+      if (!data.title || !data.date) continue
       const slug = file.replace(/\.md$/, '')
       const html = wrapTables(/** @type {string} */ (marked.parse(content)))
       out.push({ locale: seg, slug, data, html, content })

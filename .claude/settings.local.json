@@ -1,11 +1,33 @@
 {
   "permissions": {
-            "defaultMode":"auto",
     "allow": [
-      "Bash(npx tsc:*)",
-      "Bash(npx vite:*)",
-      "Bash(git remote *)"
-    ]
-    
-  }
+      "Bash(*)",
+      "Bash(go mod init:*)",
+      "Bash(powershell.exe -Command \"Get-Command go -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source; \\(Get-ItemProperty ''HKLM:\\\\Software\\\\Go'' -ErrorAction SilentlyContinue\\).InstallDir; Get-ChildItem ''C:\\\\'' -Filter ''go.exe'' -Recurse -ErrorAction SilentlyContinue -Depth 4 | Select-Object -First 3 FullName\")",
+      "Bash(powershell.exe -Command \"Get-ChildItem ''C:\\\\'' -Filter ''go.exe'' -Recurse -ErrorAction SilentlyContinue -Depth 5 | Select-Object FullName\")",
+      "Bash(powershell.exe -Command \"Get-ChildItem ''D:\\\\'' -Filter ''go.exe'' -Recurse -ErrorAction SilentlyContinue -Depth 5 | Select-Object FullName; Get-ChildItem ''C:\\\\Program Files'' -Filter ''go.exe'' -Recurse -ErrorAction SilentlyContinue -Depth 3 | Select-Object FullName\")",
+      "Bash(cmd /c:*)",
+      "Bash(powershell.exe -Command \"& go version\")",
+      "Bash(powershell.exe -Command:*)",
+      "Bash(powershell.exe -NoProfile -Command 'Test-Path \"\"C:\\\\Program Files\\\\Go\\\\bin\\\\go.exe\"\"; Test-Path \"\"C:\\\\Go\\\\bin\\\\go.exe\"\"; Test-Path \"\"C:\\\\Users\\\\sosdf\\\\go\\\\bin\\\\go.exe\"\"')",
+      "Bash(powershell.exe -NoProfile -Command 'choco --version 2>&1')",
+      "Bash(powershell.exe -NoProfile -Command:*)",
+      "Bash(powershell.exe -NoProfile -Command 'winget --version 2>&1')",
+      "Bash(export PATH=\"/c/Program Files/Go/bin:$PATH\")",
+      "Bash(go version:*)",
+      "Bash(go mod tidy:*)",
+      "Bash(go build:*)",
+      "Bash(go test:*)",
+      "Bash(go run:*)",
+      "Bash(go vet:*)",
+      "PowerShell(Get-CimInstance Win32_Process -Filter \"name='py.exe' or name='python.exe'\")",
+      "PowerShell(Get-CimInstance Win32_Process -Filter \"name='py.exe' or name='python.exe'\" | Where-Object { $_.CommandLine -match 'lcsweep' } | Select-Object ProcessId,CommandLine)",
+      "PowerShell($f = 'd:\\\\projects\\\\dp-engine\\\\ceo-curriculum\\\\L_pitch_repertoire\\\\03_clipping.md'; $content = [System.IO.File]::ReadAllText\\($f\\); $lines = $content -split \"`n\"; Write-Output \"Total: $\\($lines.Length\\)\"; $kept = $lines[0..1182] + $lines[1468..\\($lines.Length-1\\)]; $joined = [string]::Join\\(\"`n\", $kept\\); [System.IO.File]::WriteAllText\\($f, $joined\\); $new = [System.IO.File]::ReadAllText\\($f\\); $newLines = $new -split \"`n\"; Write-Output \"New: $\\($newLines.Length\\)\")",
+      "PowerShell($env:TAUPT_SERVER_BIN=\"c:\\\\WorkSpace\\\\Projects\\\\_personal\\\\dp-engine\\\\server\\\\bin\\\\dpengine-server.exe\"; cd 'c:\\\\WorkSpace\\\\Projects\\\\_personal\\\\dp-engine\\\\python'; python -m pytest tests/test_client.py -v 2>&1 | Select-Object -Last 40)",
+      "PowerShell(Stop-Process -Name dpengine-server -Force -ErrorAction SilentlyContinue)",
+      "PowerShell(\"killed\")"
+    ],
+    "defaultMode": "bypassPermissions"
+  },
+  "skipDangerousModePermissionPrompt": true
 }

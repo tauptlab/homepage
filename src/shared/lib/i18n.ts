@@ -210,6 +210,8 @@ const translations = {
     footer: {
       rights: 'All rights reserved.',
       desc: '차등 프라이버시(DP) 기술로 데이터 활용과 개인정보 보호를 동시에 실현합니다.',
+      contactLabel: 'Contact',
+      contactEmail: 'taupt.lab@gmail.com',
       links: [
         { label: 'Products', href: '/products' },
         { label: 'Technology', href: '/technology' },
@@ -427,6 +429,8 @@ const translations = {
     footer: {
       rights: 'All rights reserved.',
       desc: 'Mathematically proven data privacy through Differential Privacy technology.',
+      contactLabel: 'Contact',
+      contactEmail: 'taupt.lab@gmail.com',
       links: [
         { label: 'Products', href: '/products' },
         { label: 'Technology', href: '/technology' },
@@ -496,6 +500,8 @@ export type Translations = {
   footer: {
     rights: string
     desc: string
+    contactLabel: string
+    contactEmail: string
     links: readonly { label: string; href: string }[]
   }
 }

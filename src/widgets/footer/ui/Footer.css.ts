@@ -41,8 +41,28 @@ export const footerLogoImg = style({
 export const footerDesc = style({
   fontSize: '13px',
   color: themeContract.color.textMuted,
-  maxWidth: '300px',
   lineHeight: '1.6',
+})
+
+export const footerContact = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: themeContract.space.sm,
+  fontSize: '13px',
+  marginTop: themeContract.space.xs,
+})
+
+export const footerContactLabel = style({
+  color: themeContract.color.textMuted,
+  fontWeight: 700,
+})
+
+export const footerContactEmail = style({
+  color: themeContract.color.textMuted,
+  transition: 'color 0.2s',
+  ':hover': {
+    color: themeContract.color.text,
+  },
 })
 
 export const footerRight = style({

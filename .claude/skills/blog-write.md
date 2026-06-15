@@ -82,5 +82,6 @@ Before Step 1, verify:
 - ✅ No AI meta-statements ("이 글에서는…", "결론적으로…")
 - ✅ No silent publishing — strict review failures block the pipeline
 - ✅ Author = `정현진(Hyunjin Jeong)`, category ∈ {Technology, Research}
-- ✅ Thumbnail generated to `public/images/blog/{slug}.png`
-- ✅ Atomic git commit (post + image), no force push
+- ✅ Hero thumbnail generated to `public/images/blog/{slug}.webp` (WebP for deploy)
+- ✅ Up to 2 inline figures (`{slug}-fig1/2.webp`) in the same B&W cartoon style as the hero, added only where they aid understanding
+- ✅ Atomic git commit (post + hero + any figures), no force push

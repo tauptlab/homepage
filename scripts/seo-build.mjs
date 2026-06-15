@@ -270,7 +270,9 @@ function main() {
       ],
     }
     const head = headMeta({
-      title: `Blog | ${SITE_NAME}`,
+      title: L.lang === 'ko'
+        ? `차등 프라이버시·연합학습 기술 블로그 | ${SITE_NAME}`
+        : `Differential Privacy & Federated Learning Blog | ${SITE_NAME}`,
       description: L.lang === 'ko'
         ? 'TaupT 팀이 차등 프라이버시, 연합학습, 통계, 데이터 보안에 대해 이야기합니다.'
         : 'The TaupT team writes about Differential Privacy, Federated Learning, and data security.',

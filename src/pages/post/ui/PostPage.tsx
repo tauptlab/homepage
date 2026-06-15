@@ -6,6 +6,7 @@ import { useAppStore } from '@shared/store'
 import { getT } from '@shared/lib/i18n'
 import { useSeo } from '@shared/lib/seo'
 import { Header } from '@widgets/header'
+import { Footer } from '@widgets/footer'
 import * as styles from './PostPage.css'
 
 function formatDate(dateStr: string, lang: 'ko' | 'en'): string {
@@ -71,6 +72,7 @@ export function PostPage() {
         <div style={{ paddingTop: '140px', paddingLeft: '4rem', color: 'var(--color-textMuted)' }}>
           {lang === 'ko' ? '포스트를 찾을 수 없습니다.' : 'Post not found.'}
         </div>
+        <Footer />
       </div>
     )
   }
@@ -157,6 +159,8 @@ export function PostPage() {
           </div>
         </div>
       )}
+
+      <Footer />
     </div>
   )
 }

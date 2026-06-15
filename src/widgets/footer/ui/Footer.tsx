@@ -40,6 +40,12 @@ export function Footer() {
           />
         </span>
         <p className={styles.footerDesc}>{t.footer.desc}</p>
+        <p className={styles.footerContact}>
+          <span className={styles.footerContactLabel}>{t.footer.contactLabel}</span>
+          <a className={styles.footerContactEmail} href={`mailto:${t.footer.contactEmail}`}>
+            {t.footer.contactEmail}
+          </a>
+        </p>
       </div>
 
       <div className={styles.footerRight}>

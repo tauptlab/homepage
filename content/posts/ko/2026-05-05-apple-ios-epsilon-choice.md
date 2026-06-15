@@ -1,7 +1,7 @@
 ---
 title: "Apple이 키보드 학습에 ε=2~4를 공개한 진짜 의미"
 description: "Apple이 이모지·키보드 학습에 내건 ε=2~4는 한 번의 보고에 붙는 숫자입니다. 누적으로 보면 하루 16까지 허용된 설계와 그 논쟁의 핵심을 짚습니다."
-date: "2026-06-15"
+date: "2026-05-05"
 category: "Research"
 author: "정현진(Hyunjin Jeong)"
 thumbnail: "/images/blog/apple-ios-epsilon-choice.webp"

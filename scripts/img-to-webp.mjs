@@ -1,16 +1,20 @@
 // @ts-check
 /**
- * Convert raster images under public/images to WebP for lighter deployment.
+ * Convert raster images to WebP for lighter deployment.
  *
- * Usage:  node scripts/img-to-webp.mjs            (convert, keep sources)
- *         node scripts/img-to-webp.mjs --delete   (convert, then remove the
- *                                                   png/jpg sources so only
- *                                                   .webp ships)
+ * Usage:  node scripts/img-to-webp.mjs                 (walk public/images)
+ *         node scripts/img-to-webp.mjs --delete        (walk + remove sources)
+ *         node scripts/img-to-webp.mjs <file|dir> ...  (convert only those paths)
+ *
+ * With explicit path args it converts just those files (or walks the given
+ * dirs) — the pipeline uses this to webp-ify a single fallback image without
+ * touching unrelated PNGs under public/images. With no path args it walks
+ * public/images as before.
  *
  * Skips a file when an up-to-date .webp sibling already exists. Idempotent.
  */
 import { readdirSync, statSync, existsSync, unlinkSync } from 'node:fs'
-import { join, extname, dirname, basename } from 'node:path'
+import { join, extname, dirname, basename, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import sharp from 'sharp'
 
@@ -20,6 +24,7 @@ const IMAGES_DIR = join(ROOT, 'public', 'images')
 const SRC_EXT = new Set(['.png', '.jpg', '.jpeg'])
 const QUALITY = 82
 const del = process.argv.includes('--delete')
+const pathArgs = process.argv.slice(2).filter((a) => !a.startsWith('--'))
 
 /** @param {string} dir @returns {string[]} */
 function walk(dir) {
@@ -32,12 +37,32 @@ function walk(dir) {
   return out
 }
 
-async function run() {
-  if (!existsSync(IMAGES_DIR)) {
-    console.log('[img-to-webp] no public/images directory — nothing to do.')
-    return
+/** Resolve CLI path args into a flat list of source files. */
+function collectFromArgs(args) {
+  const out = []
+  for (const arg of args) {
+    const full = resolve(arg)
+    if (!existsSync(full)) {
+      console.warn(`[img-to-webp] path not found, skipping: ${arg}`)
+      continue
+    }
+    if (statSync(full).isDirectory()) out.push(...walk(full))
+    else out.push(full)
   }
-  const sources = walk(IMAGES_DIR).filter((f) => SRC_EXT.has(extname(f).toLowerCase()))
+  return out
+}
+
+async function run() {
+  let sources
+  if (pathArgs.length) {
+    sources = collectFromArgs(pathArgs).filter((f) => SRC_EXT.has(extname(f).toLowerCase()))
+  } else {
+    if (!existsSync(IMAGES_DIR)) {
+      console.log('[img-to-webp] no public/images directory — nothing to do.')
+      return
+    }
+    sources = walk(IMAGES_DIR).filter((f) => SRC_EXT.has(extname(f).toLowerCase()))
+  }
   let converted = 0
   let skipped = 0
   let removed = 0

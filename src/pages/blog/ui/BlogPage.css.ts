@@ -54,7 +54,6 @@ export const heroDesc = style({
   fontSize: '16px',
   color: themeContract.color.textMuted,
   lineHeight: 1.7,
-  maxWidth: '480px',
   animation: `${fadeUp} 0.7s 0.1s ease both`,
 })
 
@@ -93,7 +92,6 @@ export const filterBtn = style({
   transition: 'all 0.2s',
   ':hover': {
     borderColor: themeContract.color.text,
-    color: themeContract.color.text,
   },
 })
 

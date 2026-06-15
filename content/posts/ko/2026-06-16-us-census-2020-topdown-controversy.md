@@ -4,7 +4,7 @@ description: "2020 미국 인구총조사의 TopDown 알고리즘이 통계학�
 date: "2026-06-16"
 category: "Research"
 author: "정현진(Hyunjin Jeong)"
-thumbnail: "/images/blog/us-census-2020-topdown-controversy.png"
+thumbnail: "/images/blog/us-census-2020-topdown-controversy.webp"
 tags: ["차등 프라이버시", "TopDown 알고리즘", "사후 보정", "선거구 획정", "DP"]
 ---
 
@@ -80,6 +80,8 @@ tags: ["차등 프라이버시", "TopDown 알고리즘", "사후 보정", "선�
 이 재배분이 한 방향으로 쏠립니다. 음수가 될 뻔한 작은 칸은 0이나 그 위로 떠받쳐지고, 큰 칸은 총합을 맞추느라 깎입니다.
 
 그 결과 작은 카운트는 약간의 양의 편향을, 큰 카운트는 음의 편향을 갖게 됩니다. 작은 칸은 공표값이 실제보다 같거나 큰 쪽으로, 큰 칸은 같거나 작은 쪽으로 기웁니다.[^13]
+
+![부모 총계에 맞추느라 0선 아래로 내려간 작은 칸은 위로 떠받쳐지고 키 큰 칸은 깎여 내려가, 작은 칸은 양의 편향·큰 칸은 음의 편향이 생기는 모습](/images/blog/us-census-2020-topdown-controversy-fig1.webp)
 
 인구조사국의 공식 메트릭 문서도 같은 구조를 말합니다. 인구가 적은 지역은 공표값(MDF)이 원자료(CEF)보다 체계적으로 큰 양의 편향을, 인구가 많은 지역은 음의 편향을 갖는 경향이 있다는 것입니다.[^14]
 

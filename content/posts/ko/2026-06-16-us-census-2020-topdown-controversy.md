@@ -1,7 +1,7 @@
 ---
 title: "TopDown 알고리즘 논쟁의 진짜 범인은 노이즈가 아니라 사후 보정입니다"
 description: "2020 미국 인구총조사의 TopDown 알고리즘이 통계학자들에게 비판받은 이유를, 노이즈가 아닌 사후 보정 단계의 편향과 선거구 논쟁을 중심으로 짚습니다."
-date: "2026-06-14"
+date: "2026-06-16"
 category: "Research"
 author: "정현진(Hyunjin Jeong)"
 thumbnail: "/images/blog/us-census-2020-topdown-controversy.png"

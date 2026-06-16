@@ -10,7 +10,7 @@ tags: ["차등 프라이버시", "연합학습", "그래디언트 클리핑", "D
 
 연합학습에 차등 프라이버시를 붙이다 보면 이런 생각이 들기 쉽습니다.
 
-"노이즈가 너무 커서 학습이 안 되네. 클리핑 기준을 키우면 정보가 덜 잘리니까 좋아지겠지?"
+‘노이즈가 너무 커서 학습이 안 되네. 클리핑 기준을 키우면 정보가 덜 잘리니까 좋아지겠지?’
 
 반만 맞습니다.
 
@@ -18,7 +18,7 @@ tags: ["차등 프라이버시", "연합학습", "그래디언트 클리핑", "D
 
 그래서 그래디언트 클리핑은 정확도를 높이는 꼼수가 아닙니다. 한 클라이언트의 업데이트가 전체 모델을 최대 얼마까지 흔들 수 있는지 정하는 **민감도 계약**입니다.
 
-> **한 줄 요약**: DP-SGD에서 클리핑 기준 C는 "한 사람 또는 한 클라이언트가 결과를 최대 얼마까지 흔들 수 있는가"를 정합니다. C를 작게 잡으면 데이터 신호가 잘리고, C를 크게 잡으면 필요한 노이즈가 커집니다. 연합학습에서는 샘플 하나가 아니라 클라이언트 전체 업데이트를 보호 단위로 보기 때문에, 클리핑 위치와 회계 가정을 특히 조심해야 합니다.
+> **한 줄 요약**: DP-SGD에서 클리핑 기준 C는 ‘한 사람 또는 한 클라이언트가 결과를 최대 얼마까지 흔들 수 있는가’를 정합니다. C를 작게 잡으면 데이터 신호가 잘리고, C를 크게 잡으면 필요한 노이즈가 커집니다. 연합학습에서는 샘플 하나가 아니라 클라이언트 전체 업데이트를 보호 단위로 보기 때문에, 클리핑 위치와 회계 가정을 특히 조심해야 합니다.
 
 ## 클리핑이 필요한 이유
 
@@ -28,7 +28,7 @@ tags: ["차등 프라이버시", "연합학습", "그래디언트 클리핑", "D
 
 차등 프라이버시는 이런 상태를 싫어합니다.
 
-"한 사람이 빠져도 결과가 거의 같아야 한다"는 약속을 하려면, 먼저 한 사람이 결과를 얼마나 흔들 수 있는지 상한을 정해야 합니다. 그 상한이 **민감도**입니다.
+‘한 사람이 빠져도 결과가 거의 같아야 한다’는 약속을 하려면, 먼저 한 사람이 결과를 얼마나 흔들 수 있는지 상한을 정해야 합니다. 그 상한이 **민감도**입니다.
 
 DP-SGD 원 논문의 설계 이유도 같습니다. 그래디언트 크기에 미리 정해진 상한이 없으면 프라이버시 보장을 줄 수 없으므로, 각 그래디언트의 L2 길이를 클리핑합니다.[^1]
 
@@ -41,14 +41,14 @@ DP-SGD 원 논문의 설계 이유도 같습니다. 그래디언트 크기에 �
 
 ![중심에서 뻗는 그래디언트 벡터들 중 기준 C 원 안의 짧은 것은 그대로 두고, 원을 넘는 긴 것은 원 둘레에서 잘려 길이가 C로 맞춰지는 모습](/images/blog/dp-fl-gradient-clipping-fig1.webp)
 
-그다음 잘린 그래디언트들을 합치고 노이즈를 더합니다. 이때 노이즈 크기는 C에 비례합니다.[^1] C가 두 배가 되면, 같은 보호 강도를 유지하기 위해 필요한 노이즈도 대략 두 배가 됩니다.
+그다음 잘린 그래디언트를 합치고 노이즈를 더합니다. 이때 노이즈 크기는 C에 비례합니다.[^1] C가 두 배가 되면, 같은 보호 강도를 유지하기 위해 필요한 노이즈도 대략 두 배가 됩니다.
 
 그러니 C는 단순한 튜닝값이 아닙니다.
 
 1. 한 샘플 또는 한 클라이언트의 최대 영향력을 정합니다.
 2. 그 영향력을 가리기 위한 노이즈 크기의 기준이 됩니다.
 
-## 연합학습에서는 "한 사람 전체"가 들어오고 빠집니다
+## 연합학습에서는 ‘한 사람 전체’가 들어오고 빠집니다
 
 중앙집중식 DP-SGD에서는 보통 샘플 하나를 보호 단위로 봅니다.
 
@@ -58,9 +58,9 @@ DP-SGD 원 논문의 설계 이유도 같습니다. 그래디언트 크기에 �
 
 보호 단위가 바뀌면 클리핑 위치도 바뀝니다. 샘플별 그래디언트를 자르는 것이 아니라, 각 클라이언트가 로컬 학습으로 만든 업데이트 전체를 자릅니다.
 
-예를 들어 스마트폰 1,000대가 학습에 참여했다고 합시다. 각 폰은 자기 안의 데이터를 가지고 모델 업데이트를 하나 만들어 보냅니다. 서버는 이 업데이트들을 모아 전역 모델을 갱신합니다.
+예를 들어 스마트폰 1,000대가 학습에 참여했다고 합시다. 각 폰은 자기 안의 데이터를 가지고 모델 업데이트를 하나 만들어 보냅니다. 서버는 이 업데이트를 모아 전역 모델을 갱신합니다.
 
-여기서 차등 프라이버시가 가리려는 것은 "어떤 폰 하나가 참여했는가"입니다. 따라서 폰 하나가 보낸 업데이트 전체의 길이를 제한해야 합니다.
+여기서 차등 프라이버시가 가리려는 것은 ‘어떤 폰 하나가 참여했는가’입니다. 따라서 폰 하나가 보낸 업데이트 전체의 길이를 제한해야 합니다.
 
 수학적으로도, 클라이언트 업데이트의 길이를 상한 안에 묶으면 사용자 단위 민감도를 제한할 수 있습니다.[^2] 표현은 복잡하지만 실무 메시지는 단순합니다.
 
@@ -125,7 +125,7 @@ C를 잘못 다루면 정확도만 나빠지는 것이 아닙니다. ε 회계�
 
 표준 DP-SGD는 샘플별 그래디언트를 계산하고, 각 그래디언트를 자르고, 그다음 합산하고, 마지막에 노이즈를 더합니다.[^6]
 
-순서가 중요합니다. 먼저 자르고, 합치고, 노이즈를 넣어야 합니다. 자르기 전에 평균을 내거나 샘플끼리 정보가 섞이면 "한 샘플의 영향이 C 이하"라는 전제가 깨질 수 있습니다.
+순서가 중요합니다. 먼저 자르고, 합치고, 노이즈를 넣어야 합니다. 자르기 전에 평균을 내거나 샘플끼리 정보가 섞이면 ‘한 샘플의 영향이 C 이하’라는 전제가 깨질 수 있습니다.
 
 BatchNorm처럼 배치 안에서 샘플끼리 정보를 섞는 모듈을 Opacus가 금지하는 이유도 여기에 있습니다.[^7]
 
@@ -137,7 +137,7 @@ BatchNorm처럼 배치 안에서 샘플끼리 정보를 섞는 모듈을 Opacus�
 
 **셋째, 표본추출 가정을 잘못 쓰는 경우입니다.**
 
-일부 회계는 "참여자가 무작위로 뽑혔다"는 가정 덕분에 프라이버시 손실을 더 작게 계산합니다. 그런데 연합학습에서는 매 라운드 참여 가능한 클라이언트가 시간마다 바뀝니다. 균일 표본추출을 보장하기 어렵습니다.
+일부 회계는 ‘참여자가 무작위로 뽑혔다’는 가정 덕분에 프라이버시 손실을 더 작게 계산합니다. 그런데 연합학습에서는 매 라운드 참여 가능한 클라이언트가 시간마다 바뀝니다. 균일 표본추출을 보장하기 어렵습니다.
 
 실제로 분산 환경에서는 균일 표본추출이나 셔플링을 보장하기 어려워서, 일부 설계는 그 증폭 효과를 아예 가정에서 뺍니다.[^9]
 
@@ -163,13 +163,13 @@ TensorFlow Privacy도 같은 계약을 따릅니다. `l2_norm_clip`으로 민감
 
 ## 참고 문헌
 
-[^1]: Abadi, Chu, Goodfellow, McMahan, Mironov, Talwar, Zhang, "Deep Learning with Differential Privacy", ACM CCS 2016. <https://arxiv.org/abs/1607.00133>
-[^2]: McMahan, Ramage, Talwar, Zhang, "Learning Differentially Private Recurrent Language Models", ICLR 2018. <https://arxiv.org/abs/1710.06963>
-[^3]: Kairouz, McMahan, et al., "Advances and Open Problems in Federated Learning", Foundations and Trends in ML, 2021. <https://arxiv.org/abs/1912.04977>
-[^5]: Andrew, Thakkar, McMahan, Ramaswamy, "Differentially Private Learning with Adaptive Clipping", NeurIPS 2021. <https://arxiv.org/abs/1905.03871>
-[^6]: Yousefpour et al., "Opacus: User-Friendly Differential Privacy Library in PyTorch", 2021. <https://arxiv.org/abs/2109.12298>
-[^7]: Yousefpour et al., "Opacus", 2021, §2 (Model Validation). <https://arxiv.org/abs/2109.12298>
-[^8]: Bonawitz et al., "Practical Secure Aggregation for Privacy-Preserving Machine Learning", ACM CCS 2017. <https://arxiv.org/abs/1611.04482>
-[^9]: Kairouz, McMahan, Song, Thakkar, Thakurta, Xu, "Practical and Private (Deep) Learning without Sampling or Shuffling (DP-FTRL)", ICML 2021. <https://arxiv.org/abs/2103.00039>
+[^1]: Abadi, Chu, Goodfellow, McMahan, Mironov, Talwar, Zhang, ‘Deep Learning with Differential Privacy’, ACM CCS 2016. <https://arxiv.org/abs/1607.00133>
+[^2]: McMahan, Ramage, Talwar, Zhang, ‘Learning Differentially Private Recurrent Language Models’, ICLR 2018. <https://arxiv.org/abs/1710.06963>
+[^3]: Kairouz, McMahan, et al., ‘Advances and Open Problems in Federated Learning’, Foundations and Trends in ML, 2021. <https://arxiv.org/abs/1912.04977>
+[^5]: Andrew, Thakkar, McMahan, Ramaswamy, ‘Differentially Private Learning with Adaptive Clipping’, NeurIPS 2021. <https://arxiv.org/abs/1905.03871>
+[^6]: Yousefpour et al., ‘Opacus: User-Friendly Differential Privacy Library in PyTorch’, 2021. <https://arxiv.org/abs/2109.12298>
+[^7]: Yousefpour et al., ‘Opacus’, 2021, §2 (Model Validation). <https://arxiv.org/abs/2109.12298>
+[^8]: Bonawitz et al., ‘Practical Secure Aggregation for Privacy-Preserving Machine Learning’, ACM CCS 2017. <https://arxiv.org/abs/1611.04482>
+[^9]: Kairouz, McMahan, Song, Thakkar, Thakurta, Xu, ‘Practical and Private (Deep) Learning without Sampling or Shuffling (DP-FTRL)’, ICML 2021. <https://arxiv.org/abs/2103.00039>
 [^12]: Opacus 공식 API 문서, PrivacyEngine (max_grad_norm, noise_multiplier, make_private_with_epsilon). <https://opacus.ai/api/privacy_engine.html>
-[^13]: TensorFlow Privacy 공식 튜토리얼, "Implement differential privacy with TensorFlow Privacy". <https://www.tensorflow.org/responsible_ai/privacy/tutorials/classification_privacy>
+[^13]: TensorFlow Privacy 공식 튜토리얼, ‘Implement differential privacy with TensorFlow Privacy’. <https://www.tensorflow.org/responsible_ai/privacy/tutorials/classification_privacy>

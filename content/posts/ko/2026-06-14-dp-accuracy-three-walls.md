@@ -48,6 +48,10 @@ NIST SP 800-226도 차등 프라이버시를 개인의 데이터가 데이터셋
 
 이 상황에서 ‘평균을 정확히 맞히라’고 요구하면 출발부터 이상합니다. 평균이라는 목표물이 제대로 서 있지 않기 때문입니다.
 
+![코시 분포의 확률밀도함수 — 종 모양이지만 꼬리가 두꺼워 평균이 안정되지 않는 분포](/images/blog/dp-accuracy-three-walls-ref1.webp)
+
+*이미지 출처: Lieven Smits · CC BY-SA 3.0 — [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Cauchy_distribution.svg)*
+
 파레토(Pareto) 분포도 조심해야 합니다. 꼬리 지수 α가 1보다 크고 2보다 작으면 평균은 존재하지만 분산은 무한입니다. 즉 평균은 말할 수 있지만, 표본평균이 보통 데이터처럼 차분하게 안정되지 않습니다. 반대로 α가 1 이하라면 평균 자체도 유한하지 않습니다.
 
 여기서 차등 프라이버시의 입장은 냉정합니다.

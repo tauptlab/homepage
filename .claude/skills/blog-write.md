@@ -4,7 +4,7 @@ description: Generate a DP blog post end-to-end (auto topic selection → resear
 
 # /blog-write
 
-Run the full DP blog content pipeline. The pipeline picks a topic autonomously from `pipeline/topic_seeds.yaml` (avoiding overlap with existing posts in `content/posts/ko/`), researches it with parallel agents, synthesizes a Korean draft with strict citation requirements, applies strict QC, generates a thumbnail, and commits + pushes the result.
+Run the full DP blog content pipeline. The pipeline picks a topic autonomously from `pipeline/topic_seeds.yaml` (avoiding overlap with existing posts in `content/posts/ko/`), researches it with parallel agents, synthesizes a Korean draft with strict citation requirements, applies strict QC, generates a thumbnail plus copyright-safe data charts and open-license reference images, and commits + pushes the result.
 
 **You take no arguments.** The pipeline decides everything.
 
@@ -30,9 +30,11 @@ Read `pipeline/orchestrator.md` in full. It defines:
 - Retry / fallback rules
 - Critical rules (no silent publish, no force push, no fabricated citations, no self-promotion)
 
+Also note: **`pipeline/WRITING_RULES.md` is the authoritative prose style spec** (tone, natural Korean / anti-번역체, 작은따옴표 quote style, terminology, accessibility, SEO/GEO, Markdown safety). The synthesizer and strict-reviewer agents both read it; do not let a draft publish that violates it.
+
 ### Step 3. Execute the pipeline
 
-For each stage in order (0 → 1 → 2 → 2.5 → 3 → 4 → 5 → 6 → 7a → 7b → 8):
+For each stage in order (0 → 1 → 2 → 2.5 → 3 → 4 → 5 → 6 → 7a → 7b → 7c → 7d → 8):
 
 1. Check `$RUN_DIR/retry_status.json` — skip stages already marked `ok`
 2. Read the agent definition from `pipeline/agents/{name}.md`
@@ -80,8 +82,10 @@ Before Step 1, verify:
 - ✅ No self-promotional content (TaupT, DP-Engine, AC-PQ, etc.)
 - ✅ No fabricated citations — every URL verified via WebFetch
 - ✅ No AI meta-statements ("이 글에서는…", "결론적으로…")
+- ✅ All prose follows `pipeline/WRITING_RULES.md` — 합니다체, natural Korean (anti-번역체), 작은따옴표 only (no body `"`), counts as 인원/참값/집계 (not 카운트/개수), accessibility, SEO/GEO — enforced by **synthesizer** (generation) and **strict-reviewer** (QC)
 - ✅ No silent publishing — strict review failures block the pipeline
 - ✅ Author = `정현진(Hyunjin Jeong)`, category ∈ {Technology, Research}
 - ✅ Hero thumbnail generated to `public/images/blog/{slug}.webp` (WebP for deploy)
 - ✅ Up to 2 inline figures (`{slug}-fig1/2.webp`) in the same B&W cartoon style as the hero, added only where they aid understanding
+- ✅ Optional data charts (`{slug}-chartN.webp`, rendered with matplotlib from the post's own numbers) and open-license reference images (`{slug}-refN.webp`, **CC0/CC-BY/CC-BY-SA/public-domain only**, with an attribution caption) — both best-effort; refs are inserted only for assets actually built, so never a broken link
 - ✅ Atomic git commit (post + hero + any figures), no force push
